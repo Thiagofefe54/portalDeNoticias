@@ -1,0 +1,186 @@
+/* =========================================
+   STYLE GUIDE & RESET
+   ========================================= */
+:root {
+  --brand-color-light: #60A5FA;
+  --brand-color-dark: #1D4ED8;
+  --bg-color: #0F172A;
+  --stroke-color: #1E293B;
+  --text-color-primary: #F1F5F9;
+  --text-color-secondary: #CBD5E1;
+  --font-family: 'Archivo', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color-primary);
+  font-family: var(--font-family);
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 64px;
+}
+
+button { background: transparent; border: none; cursor: pointer; color: var(--text-color-primary); font-family: var(--font-family); }
+a { text-decoration: none; color: inherit; }
+
+/* Tipografia */
+.heading-1 { font-size: 24px; line-height: 135%; font-weight: 800; }
+.heading-2 { font-size: 16px; line-height: 140%; font-weight: 800; }
+.heading-3 { font-size: 14px; line-height: 140%; font-weight: 800; }
+.text-span { font-size: 14px; line-height: 145%; font-weight: 600; }
+.text-paragraph { font-size: 14px; line-height: 160%; font-weight: 400; color: var(--text-color-secondary); margin-top: 8px; }
+
+/* Tags e Links */
+.content-tag {
+  display: inline-block;
+  background-color: var(--brand-color-dark);
+  color: var(--text-color-primary);
+  font-size: 10px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.link-hover { display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+.link-hover:hover { color: var(--brand-color-light); }
+
+/* Container Global */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* =========================================
+   HEADER & NAV (Mobile First)
+   ========================================= */
+.header { border-bottom: 1px solid var(--stroke-color); padding: 24px 0; }
+.header-content { display: flex; justify-content: space-between; align-items: center; }
+.header .menu-btn, .header .search-btn { display: flex; align-items: center; gap: 8px; font-weight: 600; }
+.header .logo { font-size: 24px; font-weight: 800; color: var(--brand-color-light); }
+.header i { font-size: 20px; }
+
+.categories ul {
+  display: flex; gap: 32px; list-style: none; padding: 24px 0; overflow-x: auto; white-space: nowrap;
+}
+.categories a { color: var(--text-color-secondary); transition: color 0.2s; }
+.categories a:hover { color: var(--text-color-primary); }
+
+/* =========================================
+   CARDS COM IMAGEM DE FUNDO (Hero e Populares)
+   ========================================= */
+.featured-news, .side-news-card, .popular-card {
+  position: relative; background-size: cover; background-position: center;
+  border-radius: 4px; overflow: hidden; display: flex; flex-direction: column;
+  justify-content: flex-end; padding: 24px;
+}
+.featured-news::before, .side-news-card::before, .popular-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0) 0%, rgba(15, 23, 42, 0.9) 100%); z-index: 1;
+}
+.featured-news .content, .side-news-card h3, .popular-card h3, .content-tag { position: relative; z-index: 2; }
+
+/* Headers de Seção */
+.section-header { display: flex; justify-content: space-between; align-items: center; margin: 48px 0 24px 0; }
+
+/* Estrutura Mobile */
+.hero-grid { display: flex; flex-direction: column; gap: 24px; }
+.featured-news { min-height: 400px; }
+.side-news-grid { display: flex; flex-direction: column; gap: 24px; }
+.side-news-card, .popular-card { min-height: 200px; }
+.popular-cards-grid { display: flex; flex-direction: column; gap: 24px; }
+
+/* =========================================
+   ÁREA INFERIOR (IA e Sidebar) - Mobile
+   ========================================= */
+.bottom-layout { display: flex; flex-direction: column; gap: 48px; margin-top: 48px; }
+
+/* Lista de IA */
+.ai-list { display: flex; flex-direction: column; gap: 32px; }
+.ai-item { display: flex; flex-direction: column-reverse; gap: 16px; align-items: flex-start; }
+.ai-img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; }
+
+/* Lista "Viu isso aqui?" */
+.seen-list { display: flex; flex-direction: column; gap: 24px; }
+.seen-item { display: flex; gap: 16px; align-items: center; }
+.seen-item img { width: 80px; height: 80px; object-fit: cover; border-radius: 4px; }
+
+/* =========================================
+   DESKTOP (CSS Grid) - Telas Maiores
+   ========================================= */
+@media (min-width: 1024px) {
+  
+  /* Hero 2 Colunas */
+  .hero-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
+  .side-news-grid { display: grid; grid-template-rows: repeat(3, 1fr); gap: 16px; }
+
+  /* Mais Lidas 4 Colunas */
+  .popular-cards-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+
+  /* Área Inferior: IA (Esquerda) e Sidebar (Direita) */
+  .bottom-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
+
+  /* Ajusta os itens de IA para ficarem lado a lado */
+  .ai-item { flex-direction: row; justify-content: space-between; gap: 24px; }
+  .ai-text { flex: 1; }
+  .ai-img { width: 200px; height: 160px; }
+}
+
+/* =========================================
+   ANIMAÇÕES E INTERAÇÕES (Adicionais)
+   ========================================= */
+
+/* 1. Efeito Hover (Mouse em cima) nos Cards */
+.featured-news, .side-news-card, .popular-card, .ai-item, .seen-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featured-news:hover, .side-news-card:hover, .popular-card:hover {
+  transform: translateY(-4px); /* Sobe o card levemente */
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5); /* Aumenta a sombra */
+  cursor: pointer;
+}
+
+.ai-item:hover .ai-img {
+  transform: scale(1.03); /* Dá um zoom bem leve na imagem da IA */
+  transition: transform 0.3s ease;
+}
+
+/* 2. Comportamento do Menu Mobile (Escondido por padrão) */
+@media (max-width: 1023px) {
+  .categories {
+    display: none; /* Fica invisível até o JS agir */
+    width: 100%;
+    background-color: var(--stroke-color);
+    padding: 16px 24px;
+    border-radius: 8px;
+    margin-top: 16px;
+    animation: slideDown 0.3s ease forwards;
+  }
+  
+  .categories.active {
+    display: block; /* O JS vai adicionar essa classe ao clicar no menu */
+  }
+
+  .categories ul {
+    flex-direction: column; /* Empilha os links no celular */
+    gap: 16px;
+    padding: 0;
+  }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Classes para a animação de Scroll (Scroll Reveal) */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
